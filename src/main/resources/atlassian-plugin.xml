@@ -1,7 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
-    </plugin-info>
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+  </plugin-info>
+  <resource type="i18n" name="i18n" location="atlassian-plugin"/>
+  <servlet name="Issue CRUD" i18n-name-key="issue-crud.name" key="issue-crud" class="com.example.plugins.tutorial.servlet.IssueCRUD">
+    <description key="issue-crud.description">The Issue CRUD Plugin</description>
+    <url-pattern>/issuecrud</url-pattern>
+  </servlet>
+  <component-import key="velocityTemplateRenderer" interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer"/>
+  <component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager" />
 </atlassian-plugin>
