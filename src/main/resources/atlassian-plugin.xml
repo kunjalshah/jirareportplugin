@@ -6,10 +6,15 @@
     <version>${project.version}</version>
     <vendor name="${project.organization.name}" url="${project.organization.url}"/>
   </plugin-info>
+  
+  <web-resource key="ui-resources" name="ui-resources" >
+      <resource type="download" name="ss-table.css" location="/css/ss-table.css" />
+  </web-resource>
+      
   <resource type="i18n" name="i18n" location="atlassian-plugin"/>
-  <servlet name="Issue CRUD" i18n-name-key="issue-crud.name" key="issue-crud" class="com.example.plugins.tutorial.servlet.IssueCRUD">
-    <description key="issue-crud.description">The Issue CRUD Plugin</description>
-    <url-pattern>/issuecrud</url-pattern>
+  <servlet name="Service Scoring Dashboard Servlet" i18n-name-key="services.scoring.name" key="services.scoring" class="com.dtcc.jira.plugins.servlet.ServiceScoringDashboard">
+    <description key="services.scoring.description">DTCC JIRA Service Aggregator Plugin</description>
+    <url-pattern>/serviceScoreByEnvView</url-pattern>
   </servlet>
   <component-import key="velocityTemplateRenderer" interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer"/>
   <component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager" />

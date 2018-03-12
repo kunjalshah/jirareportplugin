@@ -1,89 +1,235 @@
 <html>
 <head>
-    <title>All Tutorial Issues &mdash; Issue CRUD Tutorial</title>
+    <title>Overall Environment Availibility Map</title>
     <meta name="decorator" content="atl.general">
     <script>
         AJS.$(document).ready(function() {
-            jQuery('.delete-issue').click(function() {
-                console.log('deleting');
-                var self = jQuery(this);
-                jQuery.ajax({
-                    type: "delete",
-                    url: "issuecrud?key=" + self.data("key"),
-                    success: function(data) {
-                        console.log('dom', self, data);
-                        self.parent().parent().remove();
-                    },
-                    error: function() {
-                        console.log('error', arguments);
-                    }
-                });
-                return false;
-            });
+        		jQuery(".tooltiptrigger").tooltip({gravity: 'w'});
         });
+        
     </script>
 </head>
 <body class="page-type-admin">
 <div class="content-container">
 
     <div class="content-body">
-        <h1>You've Got #if($issues.size()==0)<span style="color:red">NO</span>#end Issues!</h1>
-
-        #if ($errors.size()>0)
-            <div class="aui-message error shadowed">
-                #foreach($error in $errors)
-                    <p class="title">
-                        <span class="aui-icon icon-error"></span>
-                        <strong>$error</strong>
-                    </p>
-                #end
-            </div>
-            <!-- .aui-message -->
-        #end
-
-        #if ($issues.size() > 0)
+        <h1>Overall Environment Availibility Map</h1>
+        <h2>$todaysDate</h2>
+		<br/>
+        #if ($services.size() > 0)
             <div class="issues">
                 <table class="aui">
                     <thead>
                     <tr>
-                        <th>Key</th>
-                        <th>Summary</th>
-                        <th>Description</th>
-                        <th>Assignee</th>
-                        <th>Reporter</th>
-                        <th></th>
+                        <th>Service</th>
+                        <th>Service Owner</th>
+                        <th>Date Service Scored</th>
+                        <th align="center">Low DEV</th>
+                        <th align="center">DEV</th>
+                        <th align="center">FQA</th>
+                        <th align="center">PQA</th>
+                        <th align="center">PSE</th>
+                        <th align="center">PROD</th>
                     </tr>
                     </thead>
                     <tbody>
-                        #foreach( $issue in $issues )
+                        #foreach( $service in $services )
                         <tr>
-                            <td>$issue.getKey()</td>
-                            <td>$issue.getSummary()</td>
-                            <td>
-                                #if($issue.getDescription())
-                            $issue.getDescription()
-                        #end
-                            </td>
-                            <td>
-                                $issue.getAssignee().getName()
-                            </td>
-                            <td>
-                                $issue.getReporter().getName()
-                            </td>
-                            <td>
-                                <a href="issuecrud?edit=y&key=$issue.getKey()">Edit</a> &nbsp;
-                                <a href="#" class="delete-issue" data-key="$issue.getKey()">Delete</a>
-                            </td>
+                        		<td>
+	                        #if($service.getServiceName())
+	                            $service.getServiceName()
+	                        #end
+	                        </td>
+                        		<td>
+	                        #if($service.getServiceOwner())
+	                            $service.getServiceOwner()
+	                        #end
+	                        </td>
+                        		<td>
+	                        #if($service.getServiceScoredDate())
+	                            $service.getServiceScoredDate()
+	                        #end
+	                        </td>	                        
+                        		<td>
+	                        #if($service.getLowDevScore() && ($service.getLowDevScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end
+	                        #if($service.getLowDevScore() && ($service.getLowDevScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateLowDev())
+	                            				$service.getPlannedMigrationDateLowDev()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getLowDevScore() && ($service.getLowDevScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateLowDev())
+	                            				$service.getPlannedMigrationDateLowDev()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end	                        	                        
+	                        </td>
+                        		<td>
+	                        #if($service.getDevScore() && ($service.getDevScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end
+	                        #if($service.getDevScore() && ($service.getDevScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateDev())
+	                            				$service.getPlannedMigrationDateDev()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getDevScore() && ($service.getDevScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateDev())
+	                            				$service.getPlannedMigrationDateDev()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end	
+	                        </td>
+                        		<td>
+	                        #if($service.getFqaScore() && ($service.getFqaScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+										<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end                        		
+	                        #if($service.getFqaScore() && ($service.getFqaScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateFqa())
+	                            				$service.getPlannedMigrationDateFqa()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getFqaScore() && ($service.getFqaScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateFqa())
+	                            				$service.getPlannedMigrationDateFqa()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end	                        	                        
+	                        </td>
+                        		<td>
+	                        #if($service.getPqaScore() && ($service.getPqaScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+										<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end                        		
+	                        #if($service.getPqaScore() && ($service.getPqaScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDatePqa())
+	                            				$service.getPlannedMigrationDatePqa()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getPqaScore() && ($service.getPqaScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDatePqa())
+	                            				$service.getPlannedMigrationDatePqa()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end		                        
+	                        </td>	
+                        		<td>
+	                        #if($service.getPseScore() && ($service.getPseScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+										<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end                        		
+	                        #if($service.getPseScore() && ($service.getPseScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDatePse())
+	                            				$service.getPlannedMigrationDatePse()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getPseScore() && ($service.getPseScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDatePse())
+	                            				$service.getPlannedMigrationDatePse()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end	
+	                        </td>
+                        		<td>
+	                        #if($service.getProdScore() && ($service.getProdScore() == "GREEN"))
+	                            		<span class="tooltiptrigger green" title="Fully Compliant">
+										<span class="aui-icon aui-icon-small aui-iconfont-success"></span>Available
+	                            		</span>	
+	                        #end                        		
+	                        #if($service.getProdScore() && ($service.getProdScore() == "AMBER"))
+	                            		<span class="tooltiptrigger amber" title="In Progress">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-warning">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateProd())
+	                            				$service.getPlannedMigrationDateProd()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end
+	                        #if($service.getProdScore() && ($service.getProdScore() == "RED"))
+	                            		<span class="tooltiptrigger red" title="Unavailable">
+	                            			<span class="aui-icon aui-icon-small aui-iconfont-remove">
+	                            			</span>
+	                            			#if($service.getPlannedMigrationDateProd())
+	                            				$service.getPlannedMigrationDateProd()
+	                            			#else 
+	                            				Unknown	
+	                            			#end 
+	                            		</span>	
+	                        #end	
+	                        </td>		                        	                        	                                                	                        	                        	                        	                        
                         </tr>
                         #end
                     </tbody>
                 </table>
             </div>
         #end
-        <form method="get" action="issuecrud" class="aui">
-            <input type="hidden" name="new" value="y">
-            <input type="submit" class="button" value="Create new issue">
-        </form>
     </div>
 </div>
 </body>
