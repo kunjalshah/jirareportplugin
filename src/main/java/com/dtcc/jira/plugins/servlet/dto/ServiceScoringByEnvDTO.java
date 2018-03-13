@@ -148,4 +148,15 @@ public class ServiceScoringByEnvDTO {
 	this.serviceOwner = serviceOwner;
     }
 
+    @Override
+    public String toString() {
+	return "ServiceScoringByEnvDTO [serviceName=" + serviceName + ", serviceOwner=" + serviceOwner
+		+ ", lowDevScore=" + lowDevScore + ", devScore=" + devScore + ", fqaScore=" + fqaScore + ", pqaScore="
+		+ pqaScore + ", pseScore=" + pseScore + ", prodScore=" + prodScore + ", plannedMigrationDateLowDev="
+		+ plannedMigrationDateLowDev + ", plannedMigrationDateDev=" + plannedMigrationDateDev
+		+ ", plannedMigrationDateFqa=" + plannedMigrationDateFqa + ", plannedMigrationDatePqa="
+		+ plannedMigrationDatePqa + ", plannedMigrationDatePse=" + plannedMigrationDatePse
+		+ ", plannedMigrationDateProd=" + plannedMigrationDateProd + ", actualMigrationDate="
+		+ actualMigrationDate + ", serviceScoredDate=" + serviceScoredDate + "]";
+    }
 }

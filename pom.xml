@@ -126,6 +126,11 @@
             <version>4.1.1</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+		    <groupId>com.opencsv</groupId>
+		    <artifactId>opencsv</artifactId>
+		    <version>4.0</version>
+		</dependency>        
     </dependencies>
     <properties>
         <amps.version>6.3.13</amps.version>

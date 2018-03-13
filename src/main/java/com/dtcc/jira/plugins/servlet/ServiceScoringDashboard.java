@@ -1,6 +1,7 @@
 package com.dtcc.jira.plugins.servlet;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.bc.issue.search.SearchService;
-import com.atlassian.jira.bc.project.ProjectService;
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
@@ -29,21 +28,19 @@ import com.atlassian.jira.issue.search.SearchException;
 import com.atlassian.jira.jql.builder.JqlClauseBuilder;
 import com.atlassian.jira.jql.builder.JqlQueryBuilder;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.bean.PagerFilter;
 import com.atlassian.templaterenderer.TemplateRenderer;
 import com.atlassian.webresource.api.assembler.PageBuilderService;
+import com.dtcc.jira.plugins.servlet.dto.ProjectServiceMappingDTO;
 import com.dtcc.jira.plugins.servlet.dto.ServiceScoringByEnvDTO;
 import com.google.common.collect.Maps;
+import com.opencsv.bean.CsvToBeanBuilder;
 
 public class ServiceScoringDashboard extends HttpServlet {
 
     private static final long serialVersionUID = 2697899894973274006L;
     private static final Logger log = LoggerFactory.getLogger(ServiceScoringDashboard.class);
-    private IssueService issueService;
-    private ProjectService projectService;
     private SearchService searchService;
-    private UserManager jiraUserManager;
     private TemplateRenderer renderer;
     private PageBuilderService pageBuilderService;
     private final CustomFieldManager customFieldManager;
@@ -54,21 +51,15 @@ public class ServiceScoringDashboard extends HttpServlet {
      * Servlet constructor that is auto-wired by Spring to include the following
      * services registered in the params.
      *
-     * @param issueService
-     * @param projectService
      * @param searchService
-     * @param userManager
-     * @param jiraUserManager
+     * @param customFieldManager
      * @param templateRenderer
+     * @param pageBuilderService
      */
-    public ServiceScoringDashboard(IssueService issueService, ProjectService projectService,
-	    SearchService searchService, UserManager jiraUserManager, CustomFieldManager customFieldManager,
+    public ServiceScoringDashboard(SearchService searchService, CustomFieldManager customFieldManager,
 	    TemplateRenderer templateRenderer, PageBuilderService pageBuilderService) {
-	this.issueService = issueService;
-	this.projectService = projectService;
 	this.searchService = searchService;
 	this.renderer = templateRenderer;
-	this.jiraUserManager = jiraUserManager;
 	this.customFieldManager = customFieldManager;
 	this.pageBuilderService = pageBuilderService;
 
@@ -145,6 +136,10 @@ public class ServiceScoringDashboard extends HttpServlet {
 	    services.add(service);
 	}
 
+	List<ProjectServiceMappingDTO> beans = new CsvToBeanBuilder<ProjectServiceMappingDTO>(
+		new InputStreamReader(getClass().getResourceAsStream("/csv/project_service_mapping.csv")))
+			.withType(ProjectServiceMappingDTO.class).build().parse();
+
 	Map<String, Object> context = Maps.newHashMap();
 	context.put("services", services);
 	context.put("todaysDate", new SimpleDateFormat("MMM dd YYYY").format(new Date()));
@@ -217,7 +212,7 @@ public class ServiceScoringDashboard extends HttpServlet {
 	    // Perform search results
 	    searchResults = searchService.search(user, query, pagerFilter);
 	} catch (SearchException e) {
-	    e.printStackTrace();
+	    log.error("Error performing search in getting all Service Issues. " + e.getCause());
 	}
 	// return the results
 	return searchResults.getIssues();
