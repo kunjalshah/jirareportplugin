@@ -4,8 +4,6 @@ import com.opencsv.bean.CsvBindByPosition;
 
 public class ProjectServiceMappingDTO {
 
-    private String projectId;
-
     public String getProjectId() {
 	return projectId;
     }
@@ -543,137 +541,149 @@ public class ProjectServiceMappingDTO {
     }
 
     @CsvBindByPosition(position = 0)
-    private String projectName;
+    private String projectId;
     @CsvBindByPosition(position = 1)
-    private String solutionsArchitect;
+    private String projectName;
     @CsvBindByPosition(position = 2)
-    private String devDate;
+    private String solutionsArchitect;
     @CsvBindByPosition(position = 3)
-    private String qaDate;
+    private String devDate;
     @CsvBindByPosition(position = 4)
-    private String pseDate;
+    private String qaDate;
     @CsvBindByPosition(position = 5)
-    private String prodDate;
+    private String pseDate;
     @CsvBindByPosition(position = 6)
-    private String currenStage;
+    private String prodDate;
     @CsvBindByPosition(position = 7)
-    private String expectedBCMTier;
+    private String currenStage;
     @CsvBindByPosition(position = 8)
-    private String projectContact;
+    private String expectedBCMTier;
     @CsvBindByPosition(position = 9)
-    private String estimatedAWSAnnualOPEX;
+    private String projectContact;
     @CsvBindByPosition(position = 10)
-    private String cloudProvider;
+    private String estimatedAWSAnnualOPEX;
     @CsvBindByPosition(position = 11)
-    private String ec2Consumed;
+    private String cloudProvider;
     @CsvBindByPosition(position = 12)
-    private String ebsConsumed;
+    private String ec2Consumed;
     @CsvBindByPosition(position = 13)
-    private String ecsConsumed;
+    private String ebsConsumed;
     @CsvBindByPosition(position = 14)
-    private String ecrConsumed;
+    private String ecsConsumed;
     @CsvBindByPosition(position = 15)
-    private String beanStalkConsumed;
+    private String ecrConsumed;
     @CsvBindByPosition(position = 16)
-    private String lambdaConsumed;
+    private String beanStalkConsumed;
     @CsvBindByPosition(position = 17)
-    private String s3Consumed;
+    private String lambdaConsumed;
     @CsvBindByPosition(position = 18)
-    private String glacierConsumed;
+    private String s3Consumed;
     @CsvBindByPosition(position = 19)
-    private String efsConsumed;
+    private String glacierConsumed;
     @CsvBindByPosition(position = 20)
-    private String storageGatewayConsumed;
+    private String efsConsumed;
     @CsvBindByPosition(position = 21)
-    private String rdsmySQLConsumed;
+    private String storageGatewayConsumed;
     @CsvBindByPosition(position = 22)
-    private String rdsPostgreSQLConsumed;
+    private String rdsmySQLConsumed;
     @CsvBindByPosition(position = 23)
-    private String auroramySQLConsumed;
+    private String rdsPostgreSQLConsumed;
     @CsvBindByPosition(position = 24)
-    private String elasticCacheConsumed;
+    private String auroramySQLConsumed;
     @CsvBindByPosition(position = 25)
-    private String redShiftConsumed;
+    private String aurorPostgreSQLConsumed;
     @CsvBindByPosition(position = 26)
-    private String dynamoDBConsumed;
+    private String elasticCacheConsumed;
     @CsvBindByPosition(position = 27)
-    private String snowBallConsumed;
+    private String redShiftConsumed;
     @CsvBindByPosition(position = 28)
-    private String dmsConsumed;
+    private String dynamoDBConsumed;
     @CsvBindByPosition(position = 29)
-    private String tomcatConsumed;
+    private String snowBallConsumed;
     @CsvBindByPosition(position = 30)
-    private String elbConsumed;
+    private String dmsConsumed;
     @CsvBindByPosition(position = 31)
-    private String snsConsumed;
+    private String tomcatConsumed;
     @CsvBindByPosition(position = 32)
-    private String sesConsumed;
+    private String elbConsumed;
     @CsvBindByPosition(position = 33)
-    private String sqsConsumed;
+    private String snsConsumed;
     @CsvBindByPosition(position = 34)
-    private String stepFunctionsConsumed;
+    private String sesConsumed;
     @CsvBindByPosition(position = 35)
-    private String cloudFrontConsumed;
+    private String sqsConsumed;
     @CsvBindByPosition(position = 36)
-    private String apiGatewayConsumed;
+    private String stepFunctionsConsumed;
     @CsvBindByPosition(position = 37)
-    private String codeCommitConsumed;
+    private String cloudFrontConsumed;
     @CsvBindByPosition(position = 38)
-    private String cloudWatchConsumed;
+    private String apiGatewayConsumed;
     @CsvBindByPosition(position = 39)
-    private String cloudFormationConsumed;
+    private String codeCommitConsumed;
     @CsvBindByPosition(position = 40)
-    private String cloudTrailConsumed;
+    private String cloudWatchConsumed;
     @CsvBindByPosition(position = 41)
-    private String kinesisConsumed;
+    private String cloudFormationConsumed;
     @CsvBindByPosition(position = 42)
-    private String emrConsumed;
+    private String cloudTrailConsumed;
     @CsvBindByPosition(position = 43)
-    private String quickSightConsumed;
+    private String kinesisConsumed;
     @CsvBindByPosition(position = 44)
-    private String vpcConsumed;
+    private String emrConsumed;
     @CsvBindByPosition(position = 45)
-    private String directConnectConsumed;
+    private String quickSightConsumed;
     @CsvBindByPosition(position = 46)
-    private String route53Consumed;
+    private String vpcConsumed;
     @CsvBindByPosition(position = 47)
-    private String iamConsumed;
+    private String directConnectConsumed;
     @CsvBindByPosition(position = 48)
-    private String wafConsumed;
+    private String route53Consumed;
     @CsvBindByPosition(position = 49)
-    private String cmsConsumed;
+    private String iamConsumed;
     @CsvBindByPosition(position = 50)
-    private String cognitoConsumed;
+    private String wafConsumed;
     @CsvBindByPosition(position = 51)
-    private String awsShieldConsumed;
+    private String cmsConsumed;
     @CsvBindByPosition(position = 52)
-    private String kmsConsumed;
+    private String cognitoConsumed;
     @CsvBindByPosition(position = 53)
-    private String amazonComplianceConsumed;
+    private String awsShieldConsumed;
     @CsvBindByPosition(position = 54)
-    private String awsxrayConsumed;
+    private String kmsConsumed;
     @CsvBindByPosition(position = 55)
-    private String swfConsumed;
+    private String amazonComplianceConsumed;
     @CsvBindByPosition(position = 56)
-    private String awsGlueConsumed;
+    private String awsxrayConsumed;
     @CsvBindByPosition(position = 57)
-    private String athenaConsumed;
+    private String swfConsumed;
     @CsvBindByPosition(position = 58)
-    private String awsBatchConsumed;
+    private String awsGlueConsumed;
     @CsvBindByPosition(position = 59)
-    private String amazonPayConsumed;
+    private String athenaConsumed;
     @CsvBindByPosition(position = 60)
-    private String appProxyTrustBuilderConsumed;
+    private String awsBatchConsumed;
     @CsvBindByPosition(position = 61)
-    private String appProxyPingConsumed;
+    private String amazonPayConsumed;
     @CsvBindByPosition(position = 62)
-    private String dedicatedBandwidth;
+    private String appProxyTrustBuilderConsumed;
     @CsvBindByPosition(position = 63)
-    private String internetBandwidth;
+    private String appProxyPingConsumed;
     @CsvBindByPosition(position = 64)
-    private String specialCircumstances;
+    private String dedicatedBandwidth;
     @CsvBindByPosition(position = 65)
+    private String internetBandwidth;
+    @CsvBindByPosition(position = 66)
+    private String specialCircumstances;
+    @CsvBindByPosition(position = 67)
     private String patternUsage;
+
+    public String getAurorPostgreSQLConsumed() {
+	return aurorPostgreSQLConsumed;
+    }
+
+    public void setAurorPostgreSQLConsumed(String aurorPostgreSQLConsumed) {
+	this.aurorPostgreSQLConsumed = aurorPostgreSQLConsumed;
+    }
 
     @Override
     public String toString() {
