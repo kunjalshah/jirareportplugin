@@ -1,5 +1,7 @@
 package com.dtcc.jira.plugins.servlet.dto;
 
+import java.util.List;
+
 public class ServiceScoringByEnvDTO {
 
     private String serviceName;
@@ -16,9 +18,10 @@ public class ServiceScoringByEnvDTO {
     private String plannedMigrationDatePqa;
     private String plannedMigrationDatePse;
     private String plannedMigrationDateProd;
-
     private String actualMigrationDate;
     private String serviceScoredDate;
+
+    private List<ProjectInfo> projectsUsingService;
 
     public String getPlannedMigrationDateDev() {
 	return plannedMigrationDateDev;
@@ -148,6 +151,14 @@ public class ServiceScoringByEnvDTO {
 	this.serviceOwner = serviceOwner;
     }
 
+    public List<ProjectInfo> getProjectsUsingService() {
+	return projectsUsingService;
+    }
+
+    public void setProjectsUsingService(List<ProjectInfo> projectList) {
+	this.projectsUsingService = projectList;
+    }
+
     @Override
     public String toString() {
 	return "ServiceScoringByEnvDTO [serviceName=" + serviceName + ", serviceOwner=" + serviceOwner
@@ -159,4 +170,5 @@ public class ServiceScoringByEnvDTO {
 		+ ", plannedMigrationDateProd=" + plannedMigrationDateProd + ", actualMigrationDate="
 		+ actualMigrationDate + ", serviceScoredDate=" + serviceScoredDate + "]";
     }
+
 }

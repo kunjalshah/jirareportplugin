@@ -2,7 +2,7 @@ package com.dtcc.jira.plugins.servlet.dto;
 
 import com.opencsv.bean.CsvBindByPosition;
 
-public class ProjectServiceMappingDTO {
+public class CloudConsumptionExcelData {
 
     public String getProjectId() {
 	return projectId;
@@ -687,7 +687,7 @@ public class ProjectServiceMappingDTO {
 
     @Override
     public String toString() {
-	return "ProjectServiceMappingDTO [projectId=" + projectId + ", projectName=" + projectName
+	return "CloudConsumptionExcelData [projectId=" + projectId + ", projectName=" + projectName
 		+ ", solutionsArchitect=" + solutionsArchitect + ", devDate=" + devDate + ", qaDate=" + qaDate
 		+ ", pseDate=" + pseDate + ", prodDate=" + prodDate + ", currenStage=" + currenStage
 		+ ", expectedBCMTier=" + expectedBCMTier + ", projectContact=" + projectContact

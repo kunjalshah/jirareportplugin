@@ -1,7 +1,6 @@
 package com.dtcc.jira.plugins.servlet;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,10 +30,11 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.bean.PagerFilter;
 import com.atlassian.templaterenderer.TemplateRenderer;
 import com.atlassian.webresource.api.assembler.PageBuilderService;
-import com.dtcc.jira.plugins.servlet.dto.ProjectServiceMappingDTO;
+import com.dtcc.jira.plugins.servlet.dao.CSVProjectToServiceMapping;
+import com.dtcc.jira.plugins.servlet.dao.ProjectToServiceMapping;
+import com.dtcc.jira.plugins.servlet.dto.ProjectInfo;
 import com.dtcc.jira.plugins.servlet.dto.ServiceScoringByEnvDTO;
 import com.google.common.collect.Maps;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 public class ServiceScoringDashboard extends HttpServlet {
 
@@ -124,7 +124,9 @@ public class ServiceScoringDashboard extends HttpServlet {
 		    : formatDate((Timestamp) plannedMigrationDateProd.getValue(issues.get(count)))));
 
 	    service.setServiceName(issues.get(count).getSummary());
-	    service.setServiceOwner(issues.get(count).getAssignee().getName());
+	    service.setServiceOwner(
+		    issues.get(count).getAssignee() != null ? issues.get(count).getAssignee().getDisplayName()
+			    : "Unassigned");
 
 	    service.setLowDevScore(lowDevScore == null ? null : lowDevScore.getValue(issues.get(count)).toString());
 	    service.setDevScore(devScore == null ? null : devScore.getValue(issues.get(count)).toString());
@@ -136,9 +138,12 @@ public class ServiceScoringDashboard extends HttpServlet {
 	    services.add(service);
 	}
 
-	List<ProjectServiceMappingDTO> beans = new CsvToBeanBuilder<ProjectServiceMappingDTO>(
-		new InputStreamReader(getClass().getResourceAsStream("/csv/project_service_mapping.csv")))
-			.withType(ProjectServiceMappingDTO.class).build().parse();
+	ProjectToServiceMapping projectServiceMapping = new CSVProjectToServiceMapping();
+
+	for (ServiceScoringByEnvDTO service : services) {
+	    List<ProjectInfo> projectList = projectServiceMapping.getProjectListByService(service.getServiceName());
+	    service.setProjectsUsingService(projectList);
+	}
 
 	Map<String, Object> context = Maps.newHashMap();
 	context.put("services", services);
