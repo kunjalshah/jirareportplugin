@@ -36,6 +36,13 @@ import com.dtcc.jira.plugins.servlet.dto.ProjectInfo;
 import com.dtcc.jira.plugins.servlet.dto.ServiceScoringByEnvDTO;
 import com.google.common.collect.Maps;
 
+/**
+ * JIRA Plugin Servlet that is responsible for the Service Scoring Dashboard
+ * view.
+ * 
+ * @author kunjal.shah
+ *
+ */
 public class ServiceScoringDashboard extends HttpServlet {
 
     private static final long serialVersionUID = 2697899894973274006L;
