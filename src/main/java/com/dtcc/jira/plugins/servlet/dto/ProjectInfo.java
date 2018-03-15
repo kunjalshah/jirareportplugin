@@ -6,7 +6,7 @@ public class ProjectInfo {
     private String projectName;
     private String projectContact;
 
-    public ProjectInfo(String projectName) {
+    public ProjectInfo(String projectId, String projectName, String projectContact) {
 	this.projectName = projectName;
     }
 

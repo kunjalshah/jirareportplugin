@@ -21,6 +21,7 @@
                 <table class="aui">
                     <thead>
                     <tr>
+                    	   <th style="display:none;">
                         <th>Service</th>
                         <th>Service Owner</th>
                         <th>Date Service Scored</th>
@@ -35,6 +36,11 @@
                     <tbody>
                         #foreach( $service in $services )
                         <tr>
+                       	    <td style="display:none;">
+	                        #foreach($project in $service.getProjectsUsingService())
+	                            $project.getProjectName() |
+	                        #end                       	    		
+                       	    </td>
                         		<td>
 	                        #if($service.getServiceName())
 	                            $service.getServiceName()
