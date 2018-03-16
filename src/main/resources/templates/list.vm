@@ -18,10 +18,22 @@
 		<br/>
         #if ($services.size() > 0)
             <div class="issues">
+		          <div class="sidebar-wrap">
+		            <div class="sidebar">
+		              <h4>Filter By Project:</h4>
+		              <br/>
+		              <a class="clear-filter-btn" href="javascript:void(0);"><span class="aui-icon aui-icon-small aui-iconfont-close-dialog"></span>Clear All</a>
+		              <ul class="filter-list">
+			              #foreach($project in $projects)
+			              	<li><label><input type="checkbox" name="project" value="$project.getProjectName()" /><span></span>$project.getProjectName()</label></li>
+		                  #end 
+		              </ul>
+		            </div>
+		          </div>                            
                 <table class="aui">
                     <thead>
                     <tr>
-                    	   <th style="display:none;">
+                    	   <th style="display:none;"></th>
                         <th>Service</th>
                         <th>Service Owner</th>
                         <th>Date Service Scored</th>

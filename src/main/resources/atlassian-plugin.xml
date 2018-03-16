@@ -9,6 +9,7 @@
   
   <web-resource key="ui-resources" name="ui-resources" >
       <resource type="download" name="ss-table.css" location="/css/ss-table.css" />
+      <resource type="download" name="filter.js" location="/js/filter.js" />
   </web-resource>
       
   <resource type="i18n" name="i18n" location="atlassian-plugin"/>

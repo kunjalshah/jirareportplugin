@@ -20,4 +20,12 @@ public interface ProjectToServiceMapping {
      */
     List<ProjectInfo> getProjectListByService(String serviceName);
 
+    /**
+     * Gets a list of all Projects
+     * 
+     * @param serviceName
+     * @return
+     */
+    List<ProjectInfo> getAllProjectList();
+
 }

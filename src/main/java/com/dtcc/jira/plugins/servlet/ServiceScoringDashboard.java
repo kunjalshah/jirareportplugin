@@ -154,6 +154,7 @@ public class ServiceScoringDashboard extends HttpServlet {
 
 	Map<String, Object> context = Maps.newHashMap();
 	context.put("services", services);
+	context.put("projects", projectServiceMapping.getAllProjectList());
 	context.put("todaysDate", new SimpleDateFormat("MMM dd YYYY").format(new Date()));
 	resp.setContentType("text/html;charset=utf-8");
 	pageBuilderService.assembler().resources()
