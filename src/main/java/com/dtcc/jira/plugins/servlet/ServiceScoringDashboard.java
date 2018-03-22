@@ -159,7 +159,8 @@ public class ServiceScoringDashboard extends HttpServlet {
 	resp.setContentType("text/html;charset=utf-8");
 	pageBuilderService.assembler().resources()
 		.requireWebResource("com.dtcc.jira.plugins.servlet.ServicesScoringDashboard:ui-resources")
-		.requireWebResource("com.atlassian.auiplugin:aui-experimental-tooltips");
+		.requireWebResource("com.atlassian.auiplugin:aui-experimental-tooltips")
+		.requireWebResource("com.atlassian.auiplugin:aui-experimental-table-sortable");
 
 	// Pass in the list of issues as the context
 	renderer.render(LIST_BROWSER_TEMPLATE, context, resp.getWriter());

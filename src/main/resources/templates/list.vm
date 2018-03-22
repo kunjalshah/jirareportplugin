@@ -30,7 +30,7 @@
 		              </ul>
 		            </div>
 		          </div>                            
-                <table class="aui">
+                <table class="aui aui-table-sortable">
                     <thead>
                     <tr>
                     	   <th style="display:none;"></th>
