@@ -61,8 +61,13 @@ public class CSVProjectToServiceMapping implements ProjectToServiceMapping {
 		// Check if "project name" column is not empty/null
 		if (StringUtils.isNotEmpty(nextLine[EXCEL_PROJECT_NAME_COLUMN])) {
 
+		    String tier = StringUtils.trim(nextLine[8]);
+
+		    if (StringUtils.isEmpty(tier) || StringUtils.equalsIgnoreCase(tier, "TBD")) {
+			tier = "TBD";
+		    }
 		    ProjectInfo projectInfo = new ProjectInfo(nextLine[0], nextLine[EXCEL_PROJECT_NAME_COLUMN],
-			    nextLine[2]);
+			    nextLine[2], tier);
 		    allProjectList.add(projectInfo);
 
 		    // iterate over all the AWS service columns (12-63) in the CSV row

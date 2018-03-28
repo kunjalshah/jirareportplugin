@@ -5,9 +5,13 @@ public class ProjectInfo {
     private String projectId;
     private String projectName;
     private String projectContact;
+    private String bcmTier;
 
-    public ProjectInfo(String projectId, String projectName, String projectContact) {
+    public ProjectInfo(String projectId, String projectName, String projectContact, String bcmTier) {
 	this.projectName = projectName;
+	this.projectId = projectId;
+	this.projectContact = projectContact;
+	this.bcmTier = bcmTier;
     }
 
     public String getProjectId() {
@@ -32,5 +36,13 @@ public class ProjectInfo {
 
     public void setProjectContact(String projectContact) {
 	this.projectContact = projectContact;
+    }
+
+    public String getBcmTier() {
+	return bcmTier;
+    }
+
+    public void setBcmTier(String bcmTier) {
+	this.bcmTier = bcmTier;
     }
 }

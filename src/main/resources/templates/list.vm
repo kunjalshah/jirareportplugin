@@ -20,6 +20,19 @@
             <div class="issues">
 		          <div class="sidebar-wrap">
 		            <div class="sidebar">
+		              <h4>Filter By Application Tier:</h4>
+		              <br/>
+		              <a class="clear-filter-btn" href="javascript:void(0);"><span class="aui-icon aui-icon-small aui-iconfont-close-dialog"></span>Clear All</a>
+		              <ul class="filter-list-tiers">
+			              	<li><label><input type="checkbox" name="tier" value="Tier 0" /><span></span>Tier 0</label></li>
+			            		<li><label><input type="checkbox" name="tier" value="Tier 1" /><span></span>Tier 1</label></li>
+			              	<li><label><input type="checkbox" name="tier" value="Tier 2" /><span></span>Tier 2</label></li>
+			              	<li><label><input type="checkbox" name="tier" value="Tier 3" /><span></span>Tier 3</label></li>
+			              	<li><label><input type="checkbox" name="tier" value="Tier 4" /><span></span>Tier 4</label></li>
+			              	<li><label><input type="checkbox" name="tier" value="Tier 5" /><span></span>Tier 5</label></li>
+			              	<li><label><input type="checkbox" name="tier" value="Tier TBD" /><span></span>Unknown/Undetermined</label></li>
+		              </ul>
+		              		            
 		              <h4>Filter By Project:</h4>
 		              <br/>
 		              <a class="clear-filter-btn" href="javascript:void(0);"><span class="aui-icon aui-icon-small aui-iconfont-close-dialog"></span>Clear All</a>
@@ -33,6 +46,7 @@
                 <table class="aui aui-table-sortable">
                     <thead>
                     <tr>
+                    	   <th style="display:none;"></th>
                     	   <th style="display:none;"></th>
                         <th>Service</th>
                         <th>Service Owner</th>
@@ -53,6 +67,11 @@
 	                            $project.getProjectName() |
 	                        #end                       	    		
                        	    </td>
+                       	    <td style="display:none;">
+	                        #foreach($project in $service.getProjectsUsingService())
+	                            Tier $project.getBcmTier() |
+	                        #end                       	    		
+                       	    </td>                       	    
                         		<td>
 	                        #if($service.getServiceName())
 	                            $service.getServiceName()
